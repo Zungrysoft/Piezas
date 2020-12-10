@@ -125,3 +125,47 @@ TEST(PiezasTest, OWinsRow)
 	obj.dropPiece(3); obj.dropPiece(2);
 	ASSERT_TRUE(obj.gameState() == O);
 }
+TEST(PiezasTest, XWinsColumn)
+{
+	Piezas obj;
+	obj.dropPiece(1); obj.dropPiece(0);
+	obj.dropPiece(0); obj.dropPiece(3);
+	obj.dropPiece(3); obj.dropPiece(0);
+	obj.dropPiece(2); obj.dropPiece(2);
+	obj.dropPiece(1); obj.dropPiece(2);
+	obj.dropPiece(1); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == X);
+}
+TEST(PiezasTest, OWinsColumn)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(0);
+	obj.dropPiece(3); obj.dropPiece(2);
+	obj.dropPiece(3); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == O);
+}
+TEST(PiezasTest, tieGameColumn)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(3);
+	obj.dropPiece(2); obj.dropPiece(3);
+	obj.dropPiece(2); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
+TEST(PiezasTest, tieGameRowColumn)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(0); obj.dropPiece(2);
+	obj.dropPiece(0); obj.dropPiece(3);
+	obj.dropPiece(1); obj.dropPiece(3);
+	obj.dropPiece(2); obj.dropPiece(1);
+	obj.dropPiece(3); obj.dropPiece(2);
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
