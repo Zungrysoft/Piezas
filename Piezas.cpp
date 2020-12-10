@@ -107,5 +107,47 @@ Piece Piezas::pieceAt(int row, int column)
 **/
 Piece Piezas::gameState()
 {
-    return Blank;
+	//Ensure the game has actually ended
+	for (int i = 0; i < BOARD_ROWS; i ++) {
+		for (int j = 0; j < BOARD_COLUMNS; j ++) {
+			if (board[i][j] == Blank) {
+				return Invalid;
+			}
+		}
+	}
+	
+	//Store each player's current largest row or column
+	int X_score = 0;
+	int O_score = 0;
+	
+    //Check rows
+	for (int i = 0; i < BOARD_ROWS; i ++) {
+		Piece cur_piece = Blank;
+		int cur_score = 0;
+		for (int j = 0; j < BOARD_COLUMNS; j ++) {
+			//Check if the type of piece has changed
+			if (board[i][j] != cur_piece) {
+				cur_piece = board[i][j];
+				cur_score = 0;
+			}
+			
+			//Increase the count
+			cur_score ++;
+			
+			//Update the scores accordingly
+			if (cur_piece == X && cur_score > X_score) {
+				X_score = cur_score;
+			}
+			if (cur_piece == O && cur_score > O_score) {
+				O_score = cur_score;
+			}
+		}
+	}
+	
+	//Return the result
+	if (X_score > O_score)
+		return X;
+	if (O_score > X_score)
+		return O;
+	return Blank;
 }

@@ -75,3 +75,53 @@ TEST(PiezasTest, belowBoard)
 	obj.dropPiece(0);
 	ASSERT_TRUE(obj.pieceAt(-1,0) == Invalid);
 }
+TEST(PiezasTest, invalidGameState)
+{
+	Piezas obj;
+	obj.dropPiece(4);
+	ASSERT_TRUE(obj.gameState() == Invalid);
+}
+TEST(PiezasTest, tieGame)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(0);
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(1); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(2);
+	obj.dropPiece(2); obj.dropPiece(3);
+	obj.dropPiece(3); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
+TEST(PiezasTest, tieGameRow)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(0);
+	obj.dropPiece(1); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(2);
+	obj.dropPiece(3); obj.dropPiece(3);
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
+TEST(PiezasTest, XWinsRow)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(0);
+	obj.dropPiece(1); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(2);
+	obj.dropPiece(3); obj.dropPiece(0);
+	obj.dropPiece(3); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == X);
+}
+TEST(PiezasTest, OWinsRow)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(0);
+	obj.dropPiece(1); obj.dropPiece(1);
+	obj.dropPiece(2); obj.dropPiece(2);
+	obj.dropPiece(0); obj.dropPiece(3);
+	obj.dropPiece(1); obj.dropPiece(3);
+	obj.dropPiece(3); obj.dropPiece(2);
+	ASSERT_TRUE(obj.gameState() == O);
+}
