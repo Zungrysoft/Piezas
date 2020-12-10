@@ -183,6 +183,17 @@ TEST(PiezasTest, fullColumnLosesTurn)
 	obj.dropPiece(1);
 	ASSERT_TRUE(obj.pieceAt(0,1) == X);
 }
+TEST(PiezasTest, noDiagonalScore)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(1);
+	obj.dropPiece(0); obj.dropPiece(2);
+	obj.dropPiece(1); obj.dropPiece(3);
+	obj.dropPiece(3); obj.dropPiece(2);
+	obj.dropPiece(1); obj.dropPiece(0);
+	obj.dropPiece(2); obj.dropPiece(3);
+	ASSERT_TRUE(obj.gameState() == O);
+}
 TEST(PiezasTest, resetEmptyBoard)
 {
 	Piezas obj;
