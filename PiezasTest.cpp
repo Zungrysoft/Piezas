@@ -169,3 +169,22 @@ TEST(PiezasTest, tieGameRowColumn)
 	obj.dropPiece(3); obj.dropPiece(2);
 	ASSERT_TRUE(obj.gameState() == Blank);
 }
+TEST(PiezasTest, outOfBoundsLosesTurn)
+{
+	Piezas obj;
+	obj.dropPiece(-1); obj.dropPiece(0);
+	ASSERT_TRUE(obj.pieceAt(0,0) == O);
+}
+TEST(PiezasTest, fullColumnLosesTurn)
+{
+	Piezas obj;
+	obj.dropPiece(0); obj.dropPiece(0);
+	obj.dropPiece(0); obj.dropPiece(0);
+	obj.dropPiece(1);
+	ASSERT_TRUE(obj.pieceAt(0,1) == X);
+}
+
+
+
+
+
