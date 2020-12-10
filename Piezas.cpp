@@ -55,7 +55,33 @@ void Piezas::reset()
 **/ 
 Piece Piezas::dropPiece(int column)
 {
-    return Blank;
+	//Keep track of the piece that is to be placed
+	Piece cur = turn;
+	
+	//Toggle whose turn it is
+	if (turn == X)
+		turn = O;
+	else if (turn == O)
+		turn = X;
+	
+	//Check for out-of-bounds moves
+    if (column < 0 || column >= BOARD_COLUMNS) {
+		return Invalid;
+	}
+	
+	//Place the piece
+	for (int i = 0; i < BOARD_ROWS; i ++) {
+		if (board[i][column] == Blank) {
+			board[i][column] = cur;
+			break;
+		}
+		//Check for a full column
+		if (i == BOARD_ROWS-1) {
+			return Blank;
+		}
+	}
+	
+    return cur;
 }
 
 /**
