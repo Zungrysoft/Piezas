@@ -18,3 +18,17 @@ TEST(PiezasTest, sanityCheck)
 {
 	ASSERT_TRUE(true);
 }
+TEST(PiezasTest, emptyBoard)
+{
+	Piezas obj;
+	bool result = true;
+	for (int i = 0; i < 3; i ++) {
+		for (int j = 0; j < 4; j ++) {
+			if (obj.pieceAt(i,j) != Blank) {
+				result = false;
+				i = 3; j = 4;
+			}
+		}
+	}
+	ASSERT_TRUE(result);
+}
